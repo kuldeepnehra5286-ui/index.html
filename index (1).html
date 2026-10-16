@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitLife fitness registration form. Set goals and start your fitness journey.">
+  <title>FitLife | Your Fitness Journey</title>
+  <style>
+    :root{--green:#19a96b;--green-dark:#118653;--ink:#122338;--muted:#53657b;--pale:#eaf7f1;--line:#dce5ed}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#f5f8fa}
+    a{color:inherit;text-decoration:none}.container{width:min(1100px,92%);margin:auto}
+    header{background:#10191d;color:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #273438}
+    .nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-size:27px;font-weight:800;letter-spacing:-1px}.brand span{color:#38cf8b}
+    nav{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:700}nav a:hover{color:#48d995}
+    .nav-cta,.button{background:var(--green);color:#fff;padding:12px 20px;border:0;border-radius:8px;font-weight:700;cursor:pointer;display:inline-block}
+    .nav-cta:hover,.button:hover{background:var(--green-dark)}
+    .hero{color:#fff;background:linear-gradient(90deg,rgba(9,20,22,.94),rgba(9,20,22,.72),rgba(9,20,22,.12)),url('assets/fitness-hero.png') center 47%/cover no-repeat;min-height:330px;display:flex;align-items:center}
+    .hero-content{padding:42px 0;max-width:610px}.eyebrow{color:#50df9c;text-transform:uppercase;letter-spacing:2px;font-weight:700;font-size:12px}
+    h1{font-size:clamp(36px,5vw,56px);line-height:1.06;margin:12px 0 16px;letter-spacing:-1.5px}h1 span{color:#43d18f}
+    .hero p{line-height:1.7;color:#e1e8e9;max-width:500px;margin:0 0 22px}
+    .features{background:#fff;padding:28px 0}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:center}
+    .feature{padding:4px 12px}.feature-icon{height:54px;width:54px;border-radius:50%;background:var(--pale);color:var(--green-dark);display:grid;place-items:center;margin:0 auto 12px;font-size:25px;font-weight:800}
+    .feature h3{margin:0 0 7px;font-size:17px}.feature p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+    .section{padding:28px 0 36px}.main-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(250px,.9fr);gap:20px;align-items:stretch}
+    .panel{background:#fff;border-radius:13px;padding:25px;box-shadow:0 8px 30px rgba(22,45,62,.05)}
+    .form-title{display:flex;gap:12px;align-items:center;margin-bottom:5px}.form-title .symbol{font-size:31px;color:var(--green)}
+    h2{font-size:25px;margin:0 0 6px;letter-spacing:-.5px}.sub{font-size:13px;color:var(--muted);margin:0 0 24px;line-height:1.5}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:15px 20px}.field{display:flex;flex-direction:column;gap:7px}
+    label{font-size:13px;font-weight:700;color:#30445c}label .required{color:#e34b4b}
+    input,select,textarea{width:100%;font:inherit;font-size:14px;padding:12px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(25,169,107,.12)}
+    .full{grid-column:1/-1}.button.submit{width:100%;font-size:15px;margin-top:3px}
+    .side-panel{background:linear-gradient(145deg,#e8f7f0,#f3fbf7);border-radius:13px;padding:26px}
+    .side-icon{font-size:28px;color:var(--green);margin-bottom:10px}.side-panel h3{font-size:21px;line-height:1.3;margin:0 0 12px}
+    .side-panel p{font-size:14px;color:#425970;line-height:1.65}.checks{padding:16px 0 0;border-top:1px solid #cce8da;list-style:none;margin:17px 0 0}
+    .checks li{margin:11px 0;font-size:13px;color:#304b5c}.checks li::before{content:"✓";font-weight:800;color:var(--green);margin-right:10px}
+    .motto{text-align:center;color:var(--green-dark);font-weight:700;font-style:italic;margin-top:25px}
+    #result{display:none;margin-top:16px;padding:13px;border-radius:8px;background:#e9f8f0;color:#126c45;font-size:14px;line-height:1.5}
+    footer{background:#10191d;color:#dbe3e7;padding:20px 0;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:15px;align-items:center}
+    @media(max-width:760px){nav{gap:12px}nav a:not(.nav-cta){display:none}.main-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}.hero{min-height:360px;background-position:center}.panel{padding:20px}}
+    @media(max-width:480px){.nav{min-height:60px}.brand{font-size:23px}.nav-cta{padding:10px 12px;font-size:12px}.hero-content{padding:35px 0}form{grid-template-columns:1fr}.full{grid-column:auto}.feature-grid{gap:20px 10px}.footer-inner{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="FitLife home">▮ Fit<span>Life</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#fitness-form">Fitness Form</a><a href="#tips">Tips</a>
+        <a class="nav-cta" href="#fitness-form">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="eyebrow">Your journey starts today</div>
+        <h1>Better Fitness<br><span>A Healthier You</span></h1>
+        <p>Track your progress, set your goals, and take the first step towards a healthier, stronger and happier life.</p>
+        <a class="button" href="#fitness-form">Fill Your Fitness Form&nbsp; →</a>
+      </div>
+    </section>
+
+    <section class="features" id="about">
+      <div class="container feature-grid">
+        <article class="feature"><div class="feature-icon">◎</div><h3>Set Your Goals</h3><p>Track your fitness, weight and health goals.</p></article>
+        <article class="feature"><div class="feature-icon">▥</div><h3>Track Progress</h3><p>Monitor your journey and stay motivated.</p></article>
+        <article class="feature"><div class="feature-icon">♡</div><h3>Stay Healthy</h3><p>Build better habits for a healthier life.</p></article>
+        <article class="feature"><div class="feature-icon">↗</div><h3>Be Your Best</h3><p>Small steps every day lead to big results.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="fitness-form">
+      <div class="container main-grid">
+        <div class="panel">
+          <div class="form-title"><span class="symbol">⚒</span><h2>Fitness Form</h2></div>
+          <p class="sub">Fill in your details to get a personalized fitness goal summary.</p>
+          <form id="fitForm">
+            <div class="field"><label for="name">Full Name <span class="required">*</span></label><input id="name" name="name" type="text" placeholder="Enter your name" required maxlength="80"></div>
+            <div class="field"><label for="height">Height (cm) <span class="required">*</span></label><input id="height" name="height" type="number" placeholder="e.g. 175" min="80" max="250" required></div>
+            <div class="field"><label for="age">Age <span class="required">*</span></label><input id="age" name="age" type="number" placeholder="Enter your age" min="13" max="100" required></div>
+            <div class="field"><label for="goal">Fitness Goal <span class="required">*</span></label><select id="goal" name="goal" required><option value="">Select your goal</option><option>Lose weight</option><option>Build muscle</option><option>Improve stamina</option><option>Maintain fitness</option><option>Improve flexibility</option></select></div>
+            <div class="field"><label for="weight">Current Weight (kg) <span class="required">*</span></label><input id="weight" name="weight" type="number" placeholder="e.g. 75" min="25" max="350" step="0.1" required></div>
+            <div class="field"><label for="activity">Activity Level <span class="required">*</span></label><select id="activity" name="activity" required><option value="">Select your activity level</option><option>Beginner — little exercise</option><option>Light — 1–3 days/week</option><option>Moderate — 3–5 days/week</option><option>Active — 6–7 days/week</option></select></div>
+            <div class="field"><label for="email">Email (optional)</label><input id="email" name="email" type="email" placeholder="you@example.com"></div>
+            <div class="field"><label for="workout">Preferred Workout</label><select id="workout" name="workout"><option value="">Choose a workout</option><option>Gym / Strength training</option><option>Walking / Running</option><option>Yoga / Pilates</option><option>Home workout</option><option>Sports</option></select></div>
+            <div class="field full"><label for="notes">Additional Notes (optional)</label><textarea id="notes" name="notes" rows="3" placeholder="Tell us about your fitness experience or preferences"></textarea></div>
+            <div class="full"><button class="button submit" type="submit">✈ &nbsp; Create My Fitness Summary</button></div>
+          </form>
+          <div id="result" role="status" aria-live="polite"></div>
+        </div>
+
+        <aside class="side-panel" id="tips">
+          <div class="side-icon">♡</div>
+          <h3>Your Fitness Journey Starts Here</h3>
+          <p>Fill out the form and take the first step towards your fitness goals. Whether you want to lose weight, gain muscle, or simply be healthier — start with small, consistent habits.</p>
+          <ul class="checks"><li>Set a clear fitness goal</li><li>Track your progress regularly</li><li>Eat balanced meals and hydrate</li><li>Make recovery and sleep a priority</li></ul>
+          <div class="motto">Stronger · Healthier · Happier</div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><span>© <span id="year"></span> FitLife. Made for your fitness journey.</span><span>Stay consistent. Keep moving. 💚</span></div></footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("fitForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const age = Number(document.getElementById("age").value);
+      const heightCm = Number(document.getElementById("height").value);
+      const weightKg = Number(document.getElementById("weight").value);
+      const goal = document.getElementById("goal").value;
+      const activity = document.getElementById("activity").value;
+      if (!name || !goal || !activity || heightCm <= 0 || weightKg <= 0 || age < 13) {
+        alert("Please check your details and complete all required fields.");
+        return;
+      }
+      const bmi = weightKg / ((heightCm / 100) ** 2);
+      let category = "within the usual adult reference range";
+      if (bmi < 18.5) category = "below the usual adult reference range";
+      else if (bmi >= 25 && bmi < 30) category = "above the usual adult reference range";
+      else if (bmi >= 30) category = "well above the usual adult reference range";
+      const result = document.getElementById("result");
+      result.innerHTML = "<strong>Thanks, " + escapeHTML(name) + "!</strong><br>" +
+        "Your selected goal is <strong>" + escapeHTML(goal) + "</strong>.<br>" +
+        "Your BMI estimate is <strong>" + bmi.toFixed(1) + "</strong> (" + category + ").<br>" +
+        "Activity level: " + escapeHTML(activity) + ".<br><small>BMI is a rough screening measure, not a diagnosis. This demo does not send or save your form online.</small>";
+      result.style.display = "block";
+      result.scrollIntoView({behavior:"smooth", block:"nearest"});
+    });
+    function escapeHTML(value) {
+      return value.replace(/[&<>"']/g, function(ch) {
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];
+      });
+    }
+  </script>
+</body>
+</html>
